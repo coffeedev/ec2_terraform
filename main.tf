@@ -21,6 +21,7 @@ resource "aws_vpc" "vpc" {
     Name        = var.vpc_name
     Environment = "475916_infra_environment"
     Terraform   = "true"
+    Owner       = "gp"
   }
 
   enable_dns_hostnames = true
