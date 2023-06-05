@@ -180,7 +180,7 @@ resource "aws_instance" "ubuntu_server" {
 
   tags = {
     Name = "weather_app_475916"
-    Owner = "gp"
+    Owner = "gp_475916"
   }
 
   lifecycle {
