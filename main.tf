@@ -19,7 +19,7 @@ resource "aws_vpc" "vpc" {
 
   tags = {
     Name        = var.vpc_name
-    Environment = "475916_infra_environment"
+    Environment = "892432_infra_environment"
     Terraform   = "true"
     Owner       = "gp_belthur_owner"
   }
@@ -64,7 +64,7 @@ resource "aws_route_table" "public_route_table" {
     #nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
   tags = {
-    Name      = "475916_infra_public_rtb"
+    Name      = "892432_infra_public_rtb"
     Terraform = "true"
   }
 }
@@ -78,7 +78,7 @@ resource "aws_route_table" "private_route_table" {
     nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
   tags = {
-    Name      = "475916_infra_private_rtb"
+    Name      = "892432_infra_private_rtb"
     Terraform = "true"
   }
 }
@@ -102,7 +102,7 @@ resource "aws_route_table_association" "private" {
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name = "475916_infra_igw"
+    Name = "892432_infra_igw"
   }
 }
 
@@ -111,7 +111,7 @@ resource "aws_eip" "nat_gateway_eip" {
   vpc        = true
   depends_on = [aws_internet_gateway.internet_gateway]
   tags = {
-    Name = "475916_infra_igw_eip"
+    Name = "892432_infra_igw_eip"
   }
 }
 
@@ -121,7 +121,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.nat_gateway_eip.id
   subnet_id     = aws_subnet.public_subnets["public_subnet_1"].id
   tags = {
-    Name = "475916_infra_nat_gateway"
+    Name = "892432_infra_nat_gateway"
   }
 }
 
@@ -180,8 +180,8 @@ resource "aws_instance" "ubuntu_server" {
   }
 
   tags = {
-    Name = "weather_app_475916"
-    Owner = "gp_475916_dev"
+    Name = "weather_app_892432"
+    Owner = "gp_892432_dev"
   }
 
   lifecycle {
@@ -218,11 +218,11 @@ resource "tls_private_key" "generated" {
 
 resource "local_file" "private_key_pem" {
   content  = tls_private_key.generated.private_key_pem
-  filename = "475916_ec2_key.pem"
+  filename = "892432_ec2_key.pem"
 }
 
 resource "aws_key_pair" "generated" {
-  key_name   = "475916_ec2_key"
+  key_name   = "892432_ec2_key"
   public_key = tls_private_key.generated.public_key_openssh
 }
 
@@ -303,8 +303,8 @@ resource "aws_security_group" "vpc-web" {
 #  }
 
 #  tags = {
-#    Name  = "475916_tf_server"
-#    Owner = "475916"
+#    Name  = "892432_tf_server"
+#    Owner = "892432"
 #  }
 
 #  lifecycle {
